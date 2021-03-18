@@ -1,2 +1,2 @@
-# login-lectures
-# study
+# login-lecture
+study
