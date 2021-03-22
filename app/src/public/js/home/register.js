@@ -12,7 +12,7 @@ registerBtn.addEventListener("click", register);
 function register(){
     if(!id.value) return alert("input ID");
     if(!pw.value) return alert("input Password");
-    if(pw !== confirmPw) return alert("pw != confirm pw");
+    if(pw.value !== confirmPw.value) return alert("pw != confirm pw");
 
     const req = {
         id: id.value,
@@ -42,6 +42,5 @@ function register(){
         })
         .catch((err) =>{
             console.error("register error");
-            console.error(err);
         });
 }

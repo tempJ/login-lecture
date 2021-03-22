@@ -8,24 +8,26 @@ class User{
         this.body = body;
     }
 
-    login(){
-        const body = this.body;
-        const {id, pw} = UserStorage.getUsersInfo(body.id);
+    async login(){
+        const client = this.body;
+        const {id, pw} = await UserStorage.getUsersInfo(client.id);
 
         if(id){
-            if( id === body.id && pw === body.pw){
-                return {success: true, msp: "login success"};
+            if( id === client.id && pw === client.pw){
+                return {success: true, msg: "login success"};
             }
             return {success: false, msg: "pw error"};
         }
         return {success: false, msg: "id error"};
     }
 
-    register(){
+    async register(){
         const client = this.body;
-        const responce = UserStorage.save(client);
-
-        return responce;
+        try{
+            const responce = await UserStorage.save(client);
+            return responce;
+        }
+        catch(err) { return { sucess: false, msg: err }; }
     }
 }
 

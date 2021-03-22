@@ -1,14 +1,43 @@
 "use strict";
 
-class UserStorage{
-    static #users = { //# 쓰면 public이 아닌 private 변수
-        id: ["a", "b", "c"],
-        pw: ["12", "123", "1234"],
-        names: ["A", "B", "C"],
-    };
+const fs = require("fs").promises;
 
-    static getUsers(...fields){
-        const users = this.#users;
+class UserStorage{
+    //변수 앞에 # 붙이면 public이 아닌 private 변수
+    static getUsers(isAll, ...fields){
+        return fs
+            .readFile("./src/db/users.json")
+            .then((data) =>{
+                return this.#getUsers(data, isAll, fields);
+            })
+            .catch(console.error);
+    }
+
+    static getUsersInfo(id){
+        return fs
+            .readFile("./src/db/users.json")
+            .then((data) =>{
+                return this.#getUserInfo(data, id);
+            })
+            .catch(console.error);
+    }
+
+    static async save(userInfo){
+        const users = await this.getUsers(true);
+
+        if(users.id.includes(userInfo.id)) throw "already exist";
+
+        users.id.push(userInfo.id);
+        users.name.push(userInfo.name);
+        users.pw.push(userInfo.pw);
+        fs.writeFile("./src/db/users.json", JSON.stringify(users));
+        return { success: true };
+    }
+
+    static #getUsers(data, isAll, fields){
+        const users = JSON.parse(data);
+        if(isAll) return users;
+
         const newUsers = fields.reduce((newUsers, field)=>{
             if(users.hasOwnProperty(field)){
                 newUsers[field] = users[field];
@@ -19,26 +48,16 @@ class UserStorage{
         return newUsers;
     }
 
-    static getUsersInfo(id){
-        const users = this.#users;
+    static #getUserInfo(data, id){
+        const users = JSON.parse(data);
         const idx = users.id.indexOf(id);
         const usersKeys = Object.keys(users); // => [id, pw, name]
-
         const userInfo = usersKeys.reduce((newUser, info) =>{
             newUser[info] = users[info][idx];
             return newUser;
         }, {});
 
         return userInfo;
-    }
-
-    static save(userInfo){
-        // const users = this.#users;
-        // users.id.push(userInfo.id);
-        // users.name.push(userInfo.name);
-        // users.pw.push(userInfo.pw);
-
-        return true;
     }
 }
 
