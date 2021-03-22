@@ -3,9 +3,9 @@
 //input id: #
 const id = document.querySelector("#id"),
     pw = document.querySelector("#pw"),
-    loginbutt = document.querySelector("button");
+    loginBtn = document.querySelector("#button");
 
-loginbutt.addEventListener("click", login);
+loginBtn.addEventListener("click", login);
 
 function login(){
     const req = {
@@ -23,7 +23,6 @@ function login(){
         body: JSON.stringify(req),
     })
         .then((res) => res.json())
-        .then(console.log)
         .then((res) => {
             if(res.success){
                 location.href = "/";
@@ -32,7 +31,7 @@ function login(){
                 alert(res.msg);
             }
         })
-        .catch((err) => {
-            console.err("login error");
+        .catch((err) =>{
+            console.error("login error");
         });
 }

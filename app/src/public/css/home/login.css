@@ -51,7 +51,7 @@ body{
     width:300px;
     margin:20px auto;
     padding:15px;
-    background:rgb(224, 224, 224);
+    background:#fff;
     color:rgb(44, 44, 44);
     border:0;
   }
@@ -64,7 +64,7 @@ body{
     color:#fff;
     padding:10px;
     font-size:20px;
-    font-weight: bold;
+    /* font-weight: bold; */
     width:330px;
     margin:20px auto;
     display:block;
@@ -81,5 +81,12 @@ body{
     cursor:pointer;
     color:#666;
   }
+
+  a{
+    text-decoration:none !important
+  }
+  a:hover {
+      text-decoration:none !important
+    }
 
   /* Copyright (c) 2021 by Benjamin (https://codepen.io/maggiben/pen/KwdeaM) */

@@ -1,5 +1,6 @@
 "use strict";
 
+const { response } = require("express");
 const UserStorage = require("./UserStorage")
 
 class User{
@@ -18,6 +19,13 @@ class User{
             return {success: false, msg: "pw error"};
         }
         return {success: false, msg: "id error"};
+    }
+
+    register(){
+        const client = this.body;
+        const responce = UserStorage.save(client);
+
+        return responce;
     }
 }
 
