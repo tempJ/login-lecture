@@ -13,6 +13,9 @@ function login(){
         pw: pw.value,
     };
 
+    if(!id.value) return alert("input ID");
+    if(!pw.value) return alert("input Password");
+
     console.log(req);
     fetch("/login", {
         method: "POST",
@@ -28,6 +31,7 @@ function login(){
                 location.href = "/";
             }
             else{
+                if(res.err) return alert(res.err);
                 alert(res.msg);
             }
         })
