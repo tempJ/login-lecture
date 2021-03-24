@@ -33,3 +33,13 @@ app.use(morgan("tiny", {stream: logger.stream})); //format은 npm site 참조
 app.use("/", home); //use: middle ware 등록 method
 
 module.exports = app;
+
+// app: project folder
+// app.js: main file
+// src: source code folder
+// .env: 환경 변수 file
+// routes: controler에 해당하는 부분 뺌
+// views: front-end folder
+// public: front에 있는 코드를 js로 제어하고 css로 처리하는 folder
+// config: code를 개발하기 위해서 필요한 설정들을 moule로 관리하는 폴더
+// log: log 저장

@@ -12,18 +12,18 @@ class User{
         const client = this.body;
 
         try{
-            const {id, pw} = await UserStorage.getUsersInfo(client.id);
+            const user = await UserStorage.getUsersInfo(client.id);
 
-            if(id){
-                if( id === client.id && pw === client.pw){
-                    return {success: true, msg: "login success"};
+            if(user){
+                if( user.id === client.id && user.pw === client.pw){
+                    return {success: true};
                 }
                 return {success: false, msg: "pw error"};
             }
             return {success: false, msg: "id error"};
         }
         catch(err) {
-            return { sucess: false, err };
+            return { success: false, err };
         }
     }
 
@@ -35,7 +35,7 @@ class User{
             return responce;
         }
         catch(err) {
-            return { sucess: false, err };
+            return { success: false, err };
         }
     }
 }

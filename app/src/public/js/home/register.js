@@ -37,8 +37,8 @@ function register(){
                 location.href = "/login";
             }
             else{
-                if(res.err) return alert(res.err);
-                alert(res.msg);
+                if(res.err) return alert(JSON.stringify(res.err));
+                alert(JSON.stringify(res.msg));
             }
         })
         .catch((err) =>{
