@@ -38,6 +38,17 @@ class User{
             return { success: false, err };
         }
     }
+
+    async chart(){
+        const client = this.body;
+        try{
+            const responce = await UserStorage.save(client);
+            return responce;
+        }
+        catch(err) {
+            return { success: false, err };
+        }
+    }
 }
 
 module.exports = User;
